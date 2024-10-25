@@ -1,3 +1,5 @@
+
+
 """
 Django settings for core project.
 
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "core",
 ]
 
 MIDDLEWARE = [
@@ -69,20 +72,24 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
+import os
+from dotenv import load_dotenv
+from utils.encryption import decrypt_password
+load_dotenv()
 
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+ENCRYPTED_DB_PASSWORD = os.getenv("ENCRYPTED_DB_PASSWORD")
+db_password = decrypt_password(ENCRYPTED_DB_PASSWORD)
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.getenv("DB_NAME"),
+        'USER': os.getenv("DB_USER"),
+        'PASSWORD': db_password,
+        'HOST': os.getenv("DB_HOST"),
+        'PORT': os.getenv("DB_PORT"),
     }
 }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
