@@ -1,9 +1,12 @@
 import React from "react";
 import * as S from "./HomeStyles"
+import ContainerHome from "../../containers/container_home/ContainerHome";
 
 const Home = () =>{
     return(
-        <h1>Hello World</h1>
+        <S.HomeBackground>
+            <ContainerHome/>
+        </S.HomeBackground>
     )
 }
 

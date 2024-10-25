@@ -7,6 +7,7 @@ import { GlobalStyles } from "./styles/GlobalStyles"
 function App() {
   return (
     <>
+      <GlobalStyles/>
       <Router>
         <Routes>
           <Route path= "/" element = {<Home/>}/>
